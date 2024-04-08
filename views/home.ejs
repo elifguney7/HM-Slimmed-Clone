@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>H&M Online Alışveriş - Moda, Ev & Giyim Markası | H&M TR</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="/styles.css" rel="stylesheet"> 
     
@@ -57,7 +58,8 @@
                     <% for (let j = i; j < i + 4 && j < products.length; j++) { %>
                       <div class="col-md-3">
                         <div class="card product-card">
-                          <img src="<%= products[j].img_url %>" class="card-img-top" alt="<%= products[j].name %>">
+                          <!-- <img src="<%= products[j].img_url %>" class="card-img-top" alt="<%= products[j].name %>"> -->
+                          <img src="/deneme.jpg" alt="deneme">
                           <div class="card-body">
                             <a class="card-title"><%= products[j].name %></a>
                             <p class="card-text"><%= products[j].price %> TL</p>

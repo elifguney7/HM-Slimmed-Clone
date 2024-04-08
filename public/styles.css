@@ -66,15 +66,15 @@ body{
 .new-list {
     display: flex;
     margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     width: 100%;
     text-align: left;
 }
 .new-list a {
     color: black;
     color: inherit;
-    padding: 0.5rem 1.25rem;
-    margin-right: 1.5rem;
+    padding: 0.5rem 1.15rem;
+    margin-right: 1rem;
     border: 1px solid black;
     border-radius: 20px;
     font-weight: 500;
@@ -88,7 +88,6 @@ body{
     border: none;
     cursor:default;
 }
-
 .container .carousel {
     min-width: 110%;
     display: flex;
@@ -124,7 +123,9 @@ body{
 .card-body {
     padding: 0;
     font-size: 0.8125rem;
+    margin-top: 0.25rem;
 }
 .card-body a {
-    color: inherit;
+    color: black;
+    font-weight: 400;
 }
