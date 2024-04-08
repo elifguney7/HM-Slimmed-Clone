@@ -1,6 +1,9 @@
 body{
     background-color: #FAF9F8;
 }
+.container {
+    max-width: 1008px;
+}
 .navbar {
     background-color: #FAF9F8;
     display: flex;
@@ -50,10 +53,22 @@ body{
     margin-left: 0.5rem;
     font-size: 12px;
 }
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.container h5{
+    width: 100%;
+    text-align: left;
+}
 .new-list {
     display: flex;
     margin-top: 1rem;
     margin-bottom: 2rem;
+    width: 100%;
+    text-align: left;
 }
 .new-list a {
     color: black;
@@ -64,12 +79,52 @@ body{
     border-radius: 20px;
     font-weight: 500;
 }
+.new-list a:hover {
+    text-decoration: none;
+}
 .new-list .selected {
     background-color: #E50010;
     color: white;
     border: none;
+    cursor:default;
+}
+
+.container .carousel {
+    min-width: 110%;
+    display: flex;
+    justify-content: center;
+}
+.carousel-inner {
+    display: flex;
+    max-width: 90%;
+}
+.carousel-control-prev{
+    width: auto;
+    justify-content: unset;
+    margin-left: 1rem;
+}
+.carousel-control-next {
+    width: auto;
+    justify-content: unset;
+    margin-right: 1rem;
+}
+.card {
+    border: none;
+    border-radius: 0;
+    background-color: #FAF9F8
 }
 .product-card {
     margin-bottom: 30px;
-    /* Add more custom styles as needed */
+    width: 222px;
+    height: 375px;
+}
+.product-card img {
+    height: 322px;
+}
+.card-body {
+    padding: 0;
+    font-size: 0.8125rem;
+}
+.card-body a {
+    color: inherit;
 }
