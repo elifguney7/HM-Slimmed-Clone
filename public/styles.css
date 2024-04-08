@@ -50,7 +50,25 @@ body{
     margin-left: 0.5rem;
     font-size: 12px;
 }
-
+.new-list {
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+.new-list a {
+    color: black;
+    color: inherit;
+    padding: 0.5rem 1.25rem;
+    margin-right: 1.5rem;
+    border: 1px solid black;
+    border-radius: 20px;
+    font-weight: 500;
+}
+.new-list .selected {
+    background-color: #E50010;
+    color: white;
+    border: none;
+}
 .product-card {
     margin-bottom: 30px;
     /* Add more custom styles as needed */
