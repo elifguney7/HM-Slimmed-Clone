@@ -38,6 +38,32 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/search', (req, res) => {
+    const searchText = req.query.q; // Get the search query from the request
+    const categoryQuery = 'SELECT category, COUNT(*) AS count FROM products GROUP BY category'; // Query to get categories and their counts
+    const searchQuery = `SELECT id, name, price, img_url FROM products WHERE name LIKE '%${searchText}%' ORDER BY price ASC`; // Query to get search results
+
+    connection.query(categoryQuery, (err, categories) => {
+        if (err) {
+            console.error("Error fetching categories:", err);
+            res.status(500).send("Internal Server Error");
+            return;
+        }
+
+        connection.query(searchQuery, (err, results) => {
+            if (err) {
+                console.error("Error fetching search results:", err);
+                res.status(500).send("Internal Server Error");
+                return;
+            }
+
+            // Render the 'search' view with the retrieved categories and search results
+            res.render('search', { categories, results });
+        });
+    });
+});
+
+
 // app.get('/', (req, res) => {
 //     const query = 'SELECT id, name, price, img_url FROM products WHERE is_new = 1 LIMIT 16';
 

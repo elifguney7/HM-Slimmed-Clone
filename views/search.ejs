@@ -34,56 +34,44 @@
           </form>          
         </div>
     </header>
-    <main class="container">
-        <h5>Yeni Ürünler</h5>
-        <div class="new-list">
-            <a class="selected" href="">Kadın</a>
-            <a href="">Erkek</a>
-            <a href="">Divided</a>
-            <a href="">Bebek</a>
-            <a href="">Çocuk</a>
-            <a href="">H&M HOME</a>
-            <a href="">Spor</a>
-        </div>
-        
-        <div id="productCarousel" class="carousel slide">
-            <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
-                <svg height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" focusable="false" aria-hidden="true"><path d="M12.001 3L2 12.496l10.001 9.501.688-.726L4 12.996h18.001v-1H4l8.689-8.271z"></path></svg>                
-                <span class="sr-only">Previous</span>
-              </a>
-            <div class="carousel-inner">
-              <!-- Product cards will be dynamically inserted here -->
-              <% for (let i = 0; i < products.length; i += 4) { %>
-                <div class="carousel-item <% if (i === 0) { %>active<% } %>">
-                  <div class="row">
-                    <% for (let j = i; j < i + 4 && j < products.length; j++) { %>
-                      <div class="col-md-3">
-                        <div class="card product-card">
-                          <!-- <img src="<%= products[j].img_url %>" class="card-img-top" alt="<%= products[j].name %>"> -->
-                          <img src="/deneme.jpg" alt="deneme">
-                          <div class="card-body">
-                            <a class="card-title"><%= products[j].name %></a>
-                            <p class="card-text"><%= products[j].price %> TL</p>
-                          </div>
-                        </div>
-                      </div>
-                    <% } %>
-                  </div>
-                </div>
-              <% } %>
-            </div>
-            
-            <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
-                <svg height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" focusable="false" aria-hidden="true"><path d="M12 3l10.001 9.496-10 9.501-.689-.726L20 12.996H2v-1h18l-8.688-8.271z"></path></svg>              
-                <span class="sr-only">Next</span>
-            </a>
-          </div>
-    </main>
-    
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- Any additional scripts can go here -->
+    <main class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Category filters -->
+                <h5>Categories</h5>
+                <ul>
+                    <% categories.forEach(category => { %>
+                        <li><a href="/search?category=<%= category.category %>"><%= category.category %> (<%= category.count %>)</a></li>
+                    <% }); %>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <!-- Search results -->
+                <h5>Search Results</h5>
+                <% if (results.length === 0) { %>
+                    <p>No results found.</p>
+                <% } else { %>
+                    <div class="row">
+                        <% results.forEach(product => { %>
+                            <div class="col-md-4">
+                                <div class="card product-card">
+                                    <img src="<%= product.img_url %>" class="card-img-top" alt="<%= product.name %>">
+                                    <div class="card-body">
+                                        <a class="card-title"><%= product.name %></a>
+                                        <p class="card-text"><%= product.price %> TL</p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add your footer content here -->
+
+    <!-- Bootstrap JS and any additional scripts -->
 </body>
 </html>
