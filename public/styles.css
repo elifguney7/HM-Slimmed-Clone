@@ -11,7 +11,7 @@ body{
     align-items: center;
     justify-content: center;
     padding-top: 1.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0.75rem;
 }
 .navbar-secondLine {
     display: flex;
@@ -58,6 +58,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 1.25rem;
 }
 .container h5{
     width: 100%;
@@ -129,3 +130,58 @@ body{
     color: black;
     font-weight: 400;
 }
+
+/* Search page CSS */
+.search-container {
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 20px;
+    background-color: #FAF9F8;
+}
+.search-content {
+    display: flex;
+    flex-direction: row;
+}
+.search-header {
+    text-align: center;
+    padding-bottom: 1.5rem;
+}
+.search-filters {
+    display: flex;
+    margin-bottom: 2rem;
+}
+.dropdown{
+    padding-right: 2rem;
+    background-color: #FAF9F8;
+}
+.btn {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+}
+.btn:focus{
+    color: #E50010;
+    box-shadow: none;
+}
+.categories {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+.category-label{
+    display: flex;
+    color: black;
+    text-decoration: none;
+    margin-bottom: 0.75rem;
+}
+.category-label:hover{
+    text-decoration: none;
+    color: black;
+}
+.search-results {}

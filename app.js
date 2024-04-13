@@ -57,8 +57,8 @@ app.get('/search', (req, res) => {
                 return;
             }
 
-            // Render the 'search' view with the retrieved categories and search results
-            res.render('search', { categories, results });
+            // Render the 'search' view with the retrieved categories, search results, and searchText
+            res.render('search', { categories, results, searchText });
         });
     });
 });
