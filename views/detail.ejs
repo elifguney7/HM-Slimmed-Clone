@@ -45,9 +45,24 @@
         <div class="product-detail">
             <h5><%= product.name %></h5>
             <h5><%= product.price %> TL</h5>
-            <p><%= product.description %></p>
-            <p>Category: <%= product.category %></p>
-            <p><%= product.size %></p>
+            <p><%= product.description %> | Kategori: <%= product.category %></p>
+            <p></p>
+            <p class="size-text">Bedenler</p>
+            <div class="size-buttons">
+                <% const allSizes = ['XS', 'S', 'M', 'L', 'XL']; %>
+                <% allSizes.forEach(size => { %>
+                    <% let trimmedSize = size.trim(); %>
+                    <% if (product.size.includes(trimmedSize)) { %>
+                        <button class="size-button size-button-available">
+                            <%= trimmedSize %>
+                        </button>
+                    <% } else { %>
+                        <button class="size-button">
+                            <%= trimmedSize %>
+                        </button>
+                    <% } %>
+                <% }); %>
+            </div>
         </div>
     </main>
 

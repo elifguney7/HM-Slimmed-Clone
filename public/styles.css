@@ -108,6 +108,9 @@ body{
     justify-content: unset;
     margin-right: 1rem;
 }
+.home-row {
+    margin-left: 0;
+}
 .card {
     border: none;
     border-radius: 0;
@@ -228,4 +231,21 @@ ul {
 .product-detail {
     width: 35%;
     padding: 24px 0px 24px 32px;
+}
+.size-text{
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.size-button {
+    border: 1px solid #D0D0D0;
+    background-color: #E4E4E4;
+    color: #707070;
+    height: 40px;
+    width: 94px;
+    padding: 8px;
+}
+.size-button-available{
+    background-color: transparent;
+    color: #222;
 }

@@ -57,7 +57,7 @@
               <!-- Product cards will be dynamically inserted here -->
               <% for (let i = 0; i < products.length; i += 4) { %>
                 <div class="carousel-item <% if (i === 0) { %>active<% } %>">
-                  <div class="row">
+                  <div class="row home-row">
                     <% for (let j = i; j < i + 4 && j < products.length; j++) { %>
                       <div class="col-md-3">
                         <div class="card product-card">
