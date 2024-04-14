@@ -41,9 +41,17 @@
         <div class="search-content">
             <div class="categories">
                 <!-- Category filters -->
-                <ul>
+                <!-- <ul>
                     <% categories.forEach(category => { %>
                         <li><a class="category-label" href="/search?category=<%= category.category %>"><%= category.category %> <%= category.count %></a></li>
+                    <% }); %>
+                </ul> -->
+                <ul>
+                    <% categories.forEach(category => { %>
+                        <% const categoryCount = results.filter(product => product.category === category.category).length; %>
+                        <% if (categoryCount > 0) { %>
+                            <li><a class="category-label" href="/search?category=<%= category.category %>"><%= category.category %> <%= categoryCount %></a></li>
+                        <% } %>
                     <% }); %>
                 </ul>
             </div>
@@ -55,40 +63,40 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="sortDropdownMenuButton">
                         <label class="dropdown-item">
-                            <input type="radio" name="sortOption" value="recommended" checked> Önerilen
-                        </label>
-                        <label class="dropdown-item">
-                            <input type="radio" name="sortOption" value="lowToHigh"> En düşük fiyat
+                            <input type="radio" name="sortOption" value="lowToHigh" checked> En düşük fiyat
                         </label>
                         <label class="dropdown-item">
                             <input type="radio" name="sortOption" value="highToLow"> En yüksek fiyat
                         </label>
                     </div>
                 </div>
+
                 <div class="dropdown">
                     <button class="btn dropdown-toggle" type="button" id="sizeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      BEDEN
+                        BEDEN
                     </button>
                     <div class="dropdown-menu" aria-labelledby="sizeDropdownMenuButton">
-                        <label class="dropdown-item">
-                            <input type="radio" name="sizeOption" value="XS"> XS
-                        </label>
-                        <label class="dropdown-item">
-                            <input type="radio" name="sizeOption" value="S"> S
-                        </label>
-                        <label class="dropdown-item">
-                            <input type="radio" name="sizeOption" value="M"> M
-                        </label>
-                        <label class="dropdown-item">
-                            <input type="radio" name="sizeOption" value="L"> L
-                        </label>
-                        <label class="dropdown-item">
-                            <input type="radio" name="sizeOption" value="XL"> XL
-                        </label>
+                        <% let sizex = {}; %>
+                        <% results.forEach(product => { %>
+                            <% if (product.size) { %>
+                                <% product.size.split(',').forEach(size => { %>
+                                    <% if (!sizex[size.trim()]) { %>
+                                        <% sizex[size.trim()] = true; %>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" name="sizeOption" value="<%= size.trim() %>"> <%= size.trim() %>
+                                        </label>
+                                    <% } %>
+                                <% }); %>
+                            <% } %>
+                        <% }); %>
                     </div>
                 </div>
+                
             </div>
             
+           
+
+
                 <!-- Search results -->
                 
                 <% if (results.length === 0) { %>
@@ -97,7 +105,7 @@
                     <div class="row">
                         <% results.forEach(product => { %>
                             <div class="col-md-3">
-                                <div class="card search-card">
+                                <div class="card search-card" data-size="<%= product.size %>">
                                     <!-- <img src="<%= product.img_url %>" class="card-img-top" alt="<%= product.name %>"> -->
                                     <img src="/deneme.jpg" class="card-img-top" alt="<%= product.name %>">
                                     <div class="card-body">
@@ -115,9 +123,71 @@
     </main>
 
 <!-- Bootstrap JS -->
+
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+// Filter by size
+document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('input[name="sizeOption"]');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            const selectedSizes = Array.from(checkboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+            filterProducts(selectedSizes);
+        });
+    });
 
+    function filterProducts(selectedSizes) {
+        const products = document.querySelectorAll('.search-card');
+        products.forEach(function(product) {
+            const sizes = product.dataset.size.split(',').map(s => s.trim());
+            const match = selectedSizes.some(size => sizes.includes(size));
+            if (selectedSizes.length === 0 || match) {
+                product.parentNode.style.display = 'block';
+            } else {
+                product.parentNode.style.display = 'none';
+            }
+        });
+    }
+
+           // Sort by price
+           const sortDropdown = document.getElementById('sortDropdownMenuButton');
+        const sortOptions = document.querySelectorAll('input[name="sortOption"]');
+        sortOptions.forEach(function(option) {
+            option.addEventListener('change', function() {
+                const sortOption = document.querySelector('input[name="sortOption"]:checked').value;
+                sortProducts(sortOption);
+            });
+        });
+
+        function sortProducts(sortOption) {
+            const products = Array.from(document.querySelectorAll('.search-card'));
+            const sortedProducts = products.sort(function(a, b) {
+                const priceA = parseFloat(a.querySelector('.card-text').textContent);
+                const priceB = parseFloat(b.querySelector('.card-text').textContent);
+                if (sortOption === 'lowToHigh') {
+                    return priceA - priceB;
+                } else if (sortOption === 'highToLow') {
+                    return priceB - priceA;
+                } else {
+                    return 0; // Default sorting (recommended or no sorting)
+                }
+            });
+
+            const searchContent = document.querySelector('.search-content .row');
+            searchContent.innerHTML = ''; // Clear existing products
+
+            sortedProducts.forEach(function(product) {
+                searchContent.appendChild(product.parentNode); // Append sorted products back
+            });
+        }
+});
+
+
+    </script>
 </body>
 </html>

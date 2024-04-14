@@ -26,7 +26,7 @@ connection.connect((err) => {
 
 // Home Page route
 app.get('/', (req, res) => {
-    const query = 'SELECT id, name, price, img_url FROM products WHERE is_new = 1 LIMIT 16';
+    const query = 'SELECT id, name, price, img_url FROM products WHERE status = "new" LIMIT 16';
 
     connection.query(query, (err, results) => {
         if (err) {
@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 app.get('/search', (req, res) => {
     const searchText = req.query.q; // Get the search query from the request
     const categoryQuery = 'SELECT category, COUNT(*) AS count FROM products GROUP BY category'; // Query to get categories and their counts
-    const searchQuery = `SELECT id, name, price, img_url FROM products WHERE name LIKE '%${searchText}%' ORDER BY price ASC`; // Query to get search results
+    const searchQuery = `SELECT id, name, price, size, category, img_url FROM products WHERE name LIKE '%${searchText}%' ORDER BY price ASC`; // Query to get search results
 
     connection.query(categoryQuery, (err, categories) => {
         if (err) {
@@ -70,7 +70,7 @@ app.get('/detail/:productId', (req, res) => {
     const productId = req.params.productId; // Get the product ID from the request parameters
     
     // Query to retrieve product details based on the product ID
-    const query = `SELECT id, name, price, img_url, category FROM products WHERE id = ${productId}`;
+    const query = `SELECT id, name, price, description, img_url, category, size FROM products WHERE id = ${productId}`;
 
     connection.query(query, (err, results) => {
         if (err) {
@@ -90,8 +90,6 @@ app.get('/detail/:productId', (req, res) => {
         res.render('detail', { product });
     });
 });
-
-
 
 
 app.listen(PORT, (error) =>{ 
