@@ -23,6 +23,8 @@ connection.connect((err) => {
     }
     console.log('Connected to MySQL database');
 });
+
+// Home Page route
 app.get('/', (req, res) => {
     const query = 'SELECT id, name, price, img_url FROM products WHERE is_new = 1 LIMIT 16';
 
@@ -38,6 +40,7 @@ app.get('/', (req, res) => {
     });
 });
 
+// Search Page route
 app.get('/search', (req, res) => {
     const searchText = req.query.q; // Get the search query from the request
     const categoryQuery = 'SELECT category, COUNT(*) AS count FROM products GROUP BY category'; // Query to get categories and their counts
@@ -63,22 +66,33 @@ app.get('/search', (req, res) => {
     });
 });
 
+app.get('/detail/:productId', (req, res) => {
+    const productId = req.params.productId; // Get the product ID from the request parameters
+    
+    // Query to retrieve product details based on the product ID
+    const query = `SELECT id, name, img_url, category FROM products WHERE id = ${productId}`;
 
-// app.get('/', (req, res) => {
-//     const query = 'SELECT id, name, price, img_url FROM products WHERE is_new = 1 LIMIT 16';
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error("Error fetching product details:", err);
+            res.status(500).send("Internal Server Error");
+            return;
+        }
 
-//     connection.query(query, (err, results) => {
-//         if (err) {
-//             console.error("Error fetching new products:", err);
-//             res.status(500).send("Internal Server Error");
-//             return;
-//         }
-//         else{
-//             console.log(results)
-//         }
-//     })
-// 	res.sendFile(__dirname + '/home.html') 
-//   }) 
+        if (results.length === 0) {
+            // If no product found with the given ID, render an error page or redirect to the home page
+            res.status(404).send("Product not found");
+            return;
+        }
+
+        const product = results[0]; // Retrieve the first (and only) product from the results
+        // Render the 'detail' view with the retrieved product details
+        res.render('detail', { product });
+    });
+});
+
+
+
 
 app.listen(PORT, (error) =>{ 
 	if(!error) 

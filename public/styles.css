@@ -207,3 +207,9 @@ ul {
     text-decoration: none;
     color: black;
 }
+/* Detail Page CSS */
+.detail-container {
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+}
