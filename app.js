@@ -70,7 +70,7 @@ app.get('/detail/:productId', (req, res) => {
     const productId = req.params.productId; // Get the product ID from the request parameters
     
     // Query to retrieve product details based on the product ID
-    const query = `SELECT id, name, img_url, category FROM products WHERE id = ${productId}`;
+    const query = `SELECT id, name, price, img_url, category FROM products WHERE id = ${productId}`;
 
     connection.query(query, (err, results) => {
         if (err) {

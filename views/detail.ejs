@@ -38,11 +38,13 @@
     </header>
     <main class="detail-container">
         <div class="img-container">
-            <img src="<%= product.img_url %>" alt="<%= product.name %>">
+            <!-- <img src="<%= product.img_url %>" alt="<%= product.name %>"> -->
+            <img src="/deneme.jpg" class="card-img-top" alt="<%= product.name %>">   
+            <img src="/deneme.jpg" class="card-img-top" alt="<%= product.name %>">
         </div>
         <div class="product-detail">
-            <h1><%= product.name %></h1>
-            <p><%= product.description %></p>
+            <h5><%= product.name %></h5>
+            <h5><%= product.price %> TL</h5>
             <p>Category: <%= product.category %></p>
         </div>
     </main>

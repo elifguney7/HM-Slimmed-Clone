@@ -209,7 +209,23 @@ ul {
 }
 /* Detail Page CSS */
 .detail-container {
+    display: flex;
     width: 100%;
     padding-left: 30px;
     padding-right: 30px;
+    margin-top: 3rem;
+}
+.img-container{
+    width: 65%;
+    display: flex;
+}
+.img-container img {
+    flex: 1; 
+    max-width: 100%;
+    height: auto; 
+    margin-right: 2px;
+}
+.product-detail {
+    width: 35%;
+    padding: 24px 0px 24px 32px;
 }
