@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express(); 
 const mysql = require('mysql');
-const PORT = 3000; 
+const port = process.env.PORT || 3000;
 const ejs = require('ejs'); // Require EJS
 
 app.set('view engine', 'ejs'); // Set EJS as the view engine
@@ -92,11 +92,10 @@ app.get('/detail/:productId', (req, res) => {
 });
 
 
-app.listen(PORT, (error) =>{ 
+app.listen(port, (error) =>{ 
 	if(!error) 
-		console.log("Server is Successfully Running, and App is listening on port "+ PORT) 
+		console.log("Server is Successfully Running, and App is listening on port "+ port) 
 	else
 		console.log("Error occurred, server can't start", error); 
 	} 
 ); 
-
