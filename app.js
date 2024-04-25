@@ -9,9 +9,9 @@ app.set('view engine', 'ejs'); // Set EJS as the view engine
 app.use(express.static('public')); 
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'test123',
+    host: 'elifguneyhmclone.mysql.database.azure.com',
+    user: 'elifguney',
+    password: 'test123.',
     database: 'my_database'
 });
 
