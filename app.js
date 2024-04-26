@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express(); 
 const mysql = require('mysql');
-const port = 3000;
+const port = 8080;
 const ejs = require('ejs'); // Require EJS
 
 app.set('view engine', 'ejs'); // Set EJS as the view engine
