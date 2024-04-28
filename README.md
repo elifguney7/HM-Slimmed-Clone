@@ -1,4 +1,4 @@
-# H& Slimmed Clone Web Application 
+# H&M Slimmed Clone Web Application 
 
 ## Overview
 
