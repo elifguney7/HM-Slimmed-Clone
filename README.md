@@ -10,11 +10,11 @@ For the reaching website follow https://19070001007hmclone.azurewebsites.net/
 ## Data Model
 ### Tables:
 products:
-id (Primary Key)
-status (e.g., "available", "out of stock", "coming soon")
-name
-description
-category
-price
-size
-img_url
+1. id (Primary Key)
+2. status ("new")
+3. name
+4. description
+5. category
+6. price
+7. size
+8. img_url
